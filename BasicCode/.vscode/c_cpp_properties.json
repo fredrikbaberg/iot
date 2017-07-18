@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Users\\fredr\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.3.0\\cores\\esp8266",
+                "C:\\Users\\fredr\\OneDrive\\Dokument\\Arduino\\libraries\\WiFiManager",
+                "C:\\Users\\fredr\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.3.0\\libraries\\ESP8266WebServer\\src",
+                "C:\\Users\\fredr\\OneDrive\\Dokument\\Arduino\\libraries\\Webbino\\src"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": false,
+                "path": [
+                    "C:\\Users\\fredr\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.3.0\\cores\\esp8266"
+                ]
+            },
+            "intelliSenseMode": "msvc-x64"
+        }
+    ]
+}
