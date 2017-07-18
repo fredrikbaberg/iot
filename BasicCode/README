@@ -1,0 +1,4 @@
+This code was a combination of multiple tutorials/repositories, e.g.:
+* Webserver from: http://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/server-examples.html
+* NTP from: https://github.com/arduino-libraries/NTPClient
+* WiFiManager from: https://github.com/tzapu/WiFiManager
