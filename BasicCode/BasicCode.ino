@@ -30,6 +30,7 @@ void setupSerial(){
 
 void setupWiFi(){
   // Connect to WiFi, print IP on serial port when done.
+  WiFi.hostname("TestNodeMCU");
   if(!wifiManager.autoConnect()){
     Serial.println("Entered config mode");
     Serial.println(WiFi.softAPIP());
