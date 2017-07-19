@@ -3,6 +3,7 @@
 #include <WiFiManager.h>
 #include <WiFiUdp.h>
 #include <NTPClient.h>
+#include <TimeLib.h>
 
 // For WiFi
 WiFiManager wifiManager;
@@ -45,6 +46,7 @@ void setupNTP(){
   timeClient.begin();
   timeClient.setTimeOffset(7200);
   timeClient.update();
+  setTime(timeClient.getEpochTime()); // Update time for TimeLib.
   Serial.println("Time: " + timeClient.getFormattedTime());
 }
 
@@ -54,19 +56,35 @@ void setupWebServer(){
   Serial.println("Started webserver.");
 }
 
+String getCurrentTime(){
+  // Convert current time to date string.
+  // http://playground.arduino.cc/code/time
+  String current_date_string;
+  String weekday_ = String(dayShortStr(weekday()));
+  String day_ = String(day());
+  String month_ = String(monthShortStr(month()));
+  String year_ = String(year());
+  String hour_ = (hour() < 10) ? "0" + String(hour()) : String(hour());
+  String minute_ = (minute() < 10) ? "0" + String(minute()) : String(minute());
+  String second_ = (second() < 10) ? "0" + String(second()) : String(second());
+  String timezone_ = "GMT+2";
+  current_date_string = weekday_ + ", " + day_ + " " + month_ + " " + year_ + " " + hour_ + ":" + minute_ + ":" + second_ + " " + timezone_;
+  return current_date_string;
+}
+
 String prepareHtmlPage(){
   String htmlPage =
     String("HTTP/1.1 200 OK\r\n") + "Content-Type: text/html\r\n" +
            "Connection: close\r\n" +  // the connection will be closed after completion of the response
            "Refresh: 5\r\n" +  // refresh the page automatically every 5 sec
            "\r\n" + "<!DOCTYPE HTML>" + "<html>" +
-           "Time: " + String(timeClient.getFormattedTime()) + + "<br>" +
+           "Time: " + getCurrentTime() + + "<br>" +
            "Analog input:  " + String(analogRead(A0)) +
            "</html>" + "\r\n";
   return htmlPage;
 }
 
-void serverLoop(){
+void webserverLoop(){
   WiFiClient client = server.available();
   // wait for a client (web browser) to connect
   if (client){
@@ -91,8 +109,7 @@ void serverLoop(){
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println(WiFi.localIP());
-  Serial.println(timeClient.getFormattedTime());
-  serverLoop();
-  delay(2000);
+  // Serial.println(WiFi.localIP());
+  webserverLoop();
+  delay(1000);
 }
